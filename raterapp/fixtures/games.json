@@ -1,0 +1,47 @@
+[
+    {
+        "model": "raterapp.game",
+        "pk": 1, 
+        "fields": {
+            "title": "Uno", 
+            "description": "Be the first one to have no cards.",
+            "designer": "Merle Robbins",
+            "year_released": 1971,
+            "number_of_players": 2,
+            "est_time_to_play": 30,
+            "rec_age": 5,
+            "player": 1,
+            "categories": [3, 1, 10]
+        }
+    },
+    {
+        "model": "raterapp.game",
+        "pk": 2, 
+        "fields": {
+            "title": "Boggle",
+            "description": "Make the most amount of words.",
+            "designer": "Parker Brothers",
+            "year_released": 1972,
+            "number_of_players": 2,
+            "est_time_to_play": 5,
+            "rec_age": 8,
+            "player": 1,
+            "categories": [2, 1]
+
+        }
+    },    {
+        "model": "raterapp.game",
+        "pk": 3, 
+        "fields": {
+            "title": "Robinson Crusoe",
+            "description": "An awesome adventure game that always tells a great story.",
+            "designer": "Portal Games",
+            "year_released": 2012,
+            "number_of_players": 1,
+            "est_time_to_play": 60,
+            "rec_age": 14,
+            "player": 1,
+            "categories": [9, 8]
+        }
+    }
+]

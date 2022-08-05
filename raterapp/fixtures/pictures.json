@@ -1,0 +1,29 @@
+[
+    {
+        "model": "raterapp.picture",
+        "pk": 1, 
+        "fields": {
+            "game_id": 1,
+            "player_id": 1,
+            "picture_url": "https://hips.hearstapps.com/del.h-cdn.co/assets/18/02/1024x1024/square-1515449075-uno-cards-2.jpg?resize=480:*"
+        }
+    },
+    {
+        "model": "raterapp.picture",
+        "pk": 2, 
+        "fields": {
+            "game_id": 2,
+            "player_id": 1,
+            "picture_url": "https://www.honestlymodern.com/wp-content/uploads/2020/03/playing-Boggle-as-a-family-square.jpg"
+
+        }
+    },    {
+        "model": "raterapp.picture",
+        "pk": 3, 
+        "fields": {
+            "game_id": 3,
+            "player_id": 1,
+            "picture_url": "https://www.theboardgamefamily.com/wp-content/uploads/2018/09/RobinsonCrusoe_BuildingMap.jpg"
+        }
+    }
+]

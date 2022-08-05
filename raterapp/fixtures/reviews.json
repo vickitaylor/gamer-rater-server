@@ -1,0 +1,29 @@
+[
+    {
+        "model": "raterapp.review",
+        "pk": 1, 
+        "fields": {
+            "game_id": 1,
+            "player_id": 1,
+            "review": "Uno is the best!"
+        }
+    },
+    {
+        "model": "raterapp.review",
+        "pk": 2, 
+        "fields": {
+            "game_id": 2,
+            "player_id": 1,
+            "review": "Ugg, Boggle, like scrabble but worse."
+
+        }
+    },    {
+        "model": "raterapp.review",
+        "pk": 3, 
+        "fields": {
+            "game_id": 3,
+            "player_id": 1,
+            "review": "Did not enjoy playing this"
+        }
+    }
+]
