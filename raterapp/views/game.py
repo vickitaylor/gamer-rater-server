@@ -59,10 +59,6 @@ class GameView(ViewSet):
         """
         # variable that stores gets and stores the logged in user
         player = Player.objects.get(user=request.auth.user)
-        
-        # variable that stores the category that was selected, finds and matches the primary
-        # key of the category that was selected
-        # category = Category.objects.get(pk=request.data["category"])
 
         # game variable declared, and the parameters of the fields, are being passed to the create
         # method.

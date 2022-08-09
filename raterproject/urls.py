@@ -19,7 +19,7 @@ from django.urls import path
 from rest_framework import routers
 
 from raterapp.views import register_user, login_user
-from raterapp.views import GameView, CategoryView
+from raterapp.views import GameView, CategoryView, GameReviewView
 
 # trailing_slash=False so /game/ is not required.
 router = routers.DefaultRouter(trailing_slash=False)
@@ -27,6 +27,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 # errors game will display.
 router.register(r'games', GameView, 'game')
 router.register(r'categories', CategoryView, 'category')
+router.register(r'reviews', GameReviewView, 'review')
 
 urlpatterns = [
     path('register', register_user),
