@@ -3,7 +3,7 @@
         "model": "raterapp.category",
         "pk": 1, 
         "fields": {
-            "name": ""
+            "name": "Strategy"
         }
     },
     {
