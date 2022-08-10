@@ -66,8 +66,6 @@ class GameReviewView(ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # created a user serializer, to only return certain fields from the user model
-
-
 class UserSerializer(serializers.ModelSerializer):
     """JSON serializer for users, to have only the id, username, and name fields return
     """

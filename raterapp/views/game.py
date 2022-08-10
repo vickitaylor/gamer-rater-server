@@ -22,7 +22,7 @@ class GameView(ViewSet):
             Response: JSON serialized list of games
         """
         # new variable games, gets a list of all the game objects returned to it
-        games = Game.objects.all()
+        games = Game.objects.all().order_by("title")
 
         # then the data from games is passed to the serializer and stored in serializer, many=True
         # is added so that is knows it is a list
@@ -39,7 +39,9 @@ class GameView(ViewSet):
 
         Returns:
             response: JSON serializer game gor the selected key
+            events = Event.objects.filter(organizer__user=request.auth.user)
         """
+            # game = Game.objects.filter(player__user=request.auth.user)
         try:
             # matching the received primary key to the list of games primary keys
             game = Game.objects.get(pk=pk)
@@ -72,10 +74,48 @@ class GameView(ViewSet):
             year_released=request.data["year_released"],
             player=player
         )
+        # for the (*request) it is needed to add for a list (ie in postman, if category:[1, 2, 3])
+        # you need the *, if just sending 1 like when using select in react, you dont use the *
+        # as it is not receiving a list
         game.categories.add(request.data["category"])
         serializer = GameSerializer(game)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def update(self, request, pk):
+        """ Handles PUT requests for the game, only the maker can edit.
+
+        Returns:
+            Response: Empty body with a 204 status code.
+        """
+        # getting the game by its primary key
+        game = Game.objects.get(pk=pk)
+        # setting the fields to the values coming in
+        game.description = request.data["description"]
+        game.designer = request.data["designer"]
+        game.est_time_to_play = request.data["est_time_to_play"]
+        game.number_of_players = request.data["number_of_players"]
+        game.rec_age = request.data["rec_age"]
+        game.title = request.data["title"]
+        game.year_released = request.data["year_released"]
+
+        # saving selections
+        game.save()
+        # assuming since the categories are many to many, that they have to be cleared out
+        # prior to saving again
+        game.categories.clear()
+        # then resaves the category selected.
+        game.categories.add(request.data["category"])
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+    def destroy(self, request, pk):
+        """Handles the delete request for a game
+        """
+        # finding the game from the pk received
+        game = Game.objects.get(pk=pk)
+
+        game.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 class GameSerializer(serializers.ModelSerializer):
     """JSON serializer for games
@@ -90,6 +130,6 @@ class GameSerializer(serializers.ModelSerializer):
         of your model fields
         """
         model = Game
-        fields = ('id', 'title', 'designer', 'year_released',
-                  'number_of_players', 'est_time_to_play', 'rec_age', 'categories')
+        fields = ('id', 'title', 'designer', 'description', 'year_released',
+                  'number_of_players', 'est_time_to_play', 'rec_age', 'categories', 'player')
         depth = 1

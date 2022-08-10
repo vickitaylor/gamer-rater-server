@@ -27,7 +27,9 @@ def login_user(request):
         token = Token.objects.get(user=authenticated_user)
         data = {
             'valid': True,
-            'token': token.key
+            'token': token.key,
+            # added property for current user, to show the user id logged in under application
+            'current_user': authenticated_user.id
         }
         return Response(data)
     else:
@@ -61,6 +63,7 @@ def register_user(request):
 
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=player.user)
+    # added current user to data
+    data = { 'token': token.key, 'current_user': new_user.id }
     # Return the token to the client
-    data = { 'token': token.key }
     return Response(data)
