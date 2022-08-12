@@ -21,7 +21,7 @@ class GameView(ViewSet):
         Returns:
             Response: JSON serialized list of games
         """
-        # new variable games, gets a list of all the game objects returned to it
+        # new variable games, gets a list of all the game objects returned to it, sorted by title
         games = Game.objects.all().order_by("title")
 
         # then the data from games is passed to the serializer and stored in serializer, many=True
@@ -41,7 +41,7 @@ class GameView(ViewSet):
             response: JSON serializer game gor the selected key
             events = Event.objects.filter(organizer__user=request.auth.user)
         """
-            # game = Game.objects.filter(player__user=request.auth.user)
+        # game = Game.objects.filter(player__user=request.auth.user)
         try:
             # matching the received primary key to the list of games primary keys
             game = Game.objects.get(pk=pk)
@@ -117,6 +117,7 @@ class GameView(ViewSet):
         game.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
+
 class GameSerializer(serializers.ModelSerializer):
     """JSON serializer for games
 
@@ -127,9 +128,31 @@ class GameSerializer(serializers.ModelSerializer):
     """
     class Meta:
         """Meta is the inner class of the model class, it is used to change the behavior
-        of your model fields
+        of your model fields.
+        For average_rating, could not access rating to show as a field, but since average_rating
+        is on the game model, was able to access that property.
         """
-        model = Game
-        fields = ('id', 'title', 'designer', 'description', 'year_released',
-                  'number_of_players', 'est_time_to_play', 'rec_age', 'categories', 'player')
-        depth = 1
+
+        try:
+            model = Game
+            fields = ('id', 'title', 'designer', 'description', 'year_released',
+                      'number_of_players', 'est_time_to_play', 'rec_age', 'categories',
+                      'player', 'average_rating')
+            depth = 1
+        except ZeroDivisionError as ex:
+            model = Game
+            fields = ('id', 'title', 'designer', 'description', 'year_released',
+                      'number_of_players', 'est_time_to_play', 'rec_age', 'categories', 'player')
+            depth = 1
+
+    # class CreateGameSerializer(serializers.ModelSerializer):
+    #     """JSON serializer for games
+
+    #     Args:
+    #         serializers (class): the serializer class which gives you a powerful, generic way to
+    #         control the output of your responses.  ModelSerializer class which provides a useful
+    #         shortcut for creating serializers that deal with model instances and querysets.
+    #     """
+    #     class Meta:
+    #         """removed average_rating since post did not work with it
+    #         """
