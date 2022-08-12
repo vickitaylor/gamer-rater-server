@@ -1,6 +1,9 @@
 from django.db import models
 
+
 class Picture(models.Model):
-    player = models.ForeignKey("Player", on_delete=models.CASCADE, related_name="picture_player")
-    picture_url = models.URLField()
-    game = models.ForeignKey("Game", on_delete=models.CASCADE, related_name="picture_game")
+    game = models.ForeignKey(
+        "Game", on_delete=models.DO_NOTHING, related_name='pictures')
+    action_pic = models.ImageField(
+        upload_to='actionimages', height_field=None,
+        width_field=None, max_length=None, null=True)

@@ -26,7 +26,7 @@ class Game(models.Model):
         for rating in ratings:
             sum_rating += rating.rating
 
-        # if statement since cannot divde by 0
+        # if statement since cannot divide by 0
         if sum_rating > 0:
             total_ratings = len(ratings)
             # getting the amount of ratings

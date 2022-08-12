@@ -131,6 +131,9 @@ class GameSerializer(serializers.ModelSerializer):
         of your model fields.
         For average_rating, could not access rating to show as a field, but since average_rating
         is on the game model, was able to access that property.
+        Added try/except due to receipt of ZeroDivisionError, if there is an average rating
+        the field will be returned, if the game has not yet been rated then the expect model
+        will kick in and not return the avg rating field
         """
 
         try:
@@ -144,15 +147,3 @@ class GameSerializer(serializers.ModelSerializer):
             fields = ('id', 'title', 'designer', 'description', 'year_released',
                       'number_of_players', 'est_time_to_play', 'rec_age', 'categories', 'player')
             depth = 1
-
-    # class CreateGameSerializer(serializers.ModelSerializer):
-    #     """JSON serializer for games
-
-    #     Args:
-    #         serializers (class): the serializer class which gives you a powerful, generic way to
-    #         control the output of your responses.  ModelSerializer class which provides a useful
-    #         shortcut for creating serializers that deal with model instances and querysets.
-    #     """
-    #     class Meta:
-    #         """removed average_rating since post did not work with it
-    #         """
