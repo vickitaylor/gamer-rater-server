@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (Top5GamesList, Bottom5GamesList,
                     MostRatedGameList, TopReviewers, GamesByCategory, MoreThan5Players,
-                    PlayerMostGames, Under8)
+                    PlayerMostGames, Under8, GamesNoPic)
 
 urlpatterns = [
     path('reports/top_5_games', Top5GamesList.as_view()),
@@ -12,5 +12,6 @@ urlpatterns = [
     path('reports/games_by_category', GamesByCategory.as_view()),
     path('reports/morethan5', MoreThan5Players.as_view()),
     path('reports/most_games', PlayerMostGames.as_view()),
-    path('reports/under8', Under8.as_view())
+    path('reports/under8', Under8.as_view()),
+    path('reports/no_pic', GamesNoPic.as_view())
 ]

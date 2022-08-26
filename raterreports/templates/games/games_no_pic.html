@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>GamerRater Reports</title>
+</head>
+<body>
+    <h1>Number of Games with No Picture</h1>
+
+    <div>
+        {% for game in game_list %}
+            {{ game.no_pic }} 
+        </li>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

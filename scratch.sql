@@ -47,7 +47,7 @@ FROM raterapp_game g
 WHERE g.number_of_players > 5;
 
 
-WITH Most AS (
+WITH NoPic AS (
     SELECT
         u.id,
         u.first_name|| ' ' || u.last_name AS Name,
@@ -74,8 +74,18 @@ SELECT
 FROM raterapp_game g
 WHERE g.rec_age < 8;
 
-SELECT DISTINCT
-    g.id,
-    g.title
-FROM raterapp_game g
-JOIN raterapp_picture p ON p.game_id = g.id;
+
+WITH NoPic AS (
+    SELECT 
+        g.id,
+        g.title,
+        COUNT(p.id) AS num
+    FROM raterapp_game g
+    LEFT JOIN raterapp_picture p ON p.game_id = g.id
+    GROUP BY g.id
+    )
+
+SELECT 
+    COUNT(*)
+FROM NoPic
+WHERE num = 0;

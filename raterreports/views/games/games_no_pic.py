@@ -1,46 +1,51 @@
 """Module for generating top 5 games report"""
-""" URL for this report is http://localhost:8000/reports/under8 """
+""" URL for this report is http://localhost:8000/reports/no_pic """
 
 from django.shortcuts import render
 from django.db import connection
 from django.views import View
 from raterreports.views.helpers import dict_fetch_all
 
-class Under8(View):
+class GamesNoPic(View):
     def get(self, request):
         with connection.cursor() as db_cursor:
 
             # 🦕🦕🦕SQL query goes here🦜🦜🦜 
             db_cursor.execute("""
+                WITH NoPic AS (
+                    SELECT 
+                        g.id,
+                        g.title,
+                        COUNT(p.id) AS num
+                    FROM raterapp_game g
+                    LEFT JOIN raterapp_picture p ON p.game_id = g.id
+                    GROUP BY g.id
+                    )
+
                 SELECT 
-                    g.id,
-                    g.title,
-                    g.rec_age
-                FROM raterapp_game g
-                WHERE g.rec_age < 8
-                ORDER BY lower(g.title)
+                    COUNT(*) AS zero
+                FROM NoPic
+                WHERE num = 0
             """)
             # Pass the db_cursor to the dict_fetch_all function to turn the fetch_all() response into a dictionary
             dataset = dict_fetch_all(db_cursor)
 
-            under8 = []
+            no_pic = []
 
             for row in dataset:
                 # TODO: Create a dictionary 
                 game = {
-                    "id": row['id'],
-                    "title": row['title'],
-                    "rec_age": row['rec_age']
+                    "no_pic": row['zero']
                 }
 
-                under8.append(game)
+                no_pic.append(game)
 
         # The template string must match the file name of the html template
-        template = 'games/games_under8.html'
+        template = 'games/games_no_pic.html'
 
         # The context will be a dictionary that the template can access to show data
         context = {
-            "game_list": under8
+            "game_list": no_pic
         }
 
         return render(request, template, context)

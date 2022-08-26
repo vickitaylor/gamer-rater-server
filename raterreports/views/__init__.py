@@ -7,3 +7,4 @@ from .games.games_by_category import GamesByCategory
 from .games.morethan5players import MoreThan5Players
 from .games.player_most_games import PlayerMostGames
 from .games.games_under8 import Under8
+from .games.games_no_pic import GamesNoPic
