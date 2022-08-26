@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'raterapp',
+    'raterreports'
 ]
 
 # updated this

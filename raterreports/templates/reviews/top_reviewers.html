@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>GamerRater Reports</title>
+</head>
+
+<body>
+    <h1>Top 3 Game Reviewers</h1>
+
+    <ol>
+        {% for review in reviewer_list %}
+        <li>
+            {{ review.Name }} has made {{review.TimesReviewed}} reviews !!
+        </li>
+        {% endfor %}
+    </ol>
+</body>
+
+</html>
