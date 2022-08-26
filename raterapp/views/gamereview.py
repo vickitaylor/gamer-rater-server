@@ -65,6 +65,23 @@ class GameReviewView(ViewSet):
         serializer = ReviewSerializer(review)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def update(self, request, pk):
+        """Handle PUT requests for a review
+
+        Returns:
+            Response: Empty body with 204 status code
+        """
+
+        # getting the review object requested by the primary key
+        review = Review.objects.get(pk=pk)
+        # setting fields on review to the values coming in from the client
+        review.review = request.data["review"]
+
+        # saving to the database
+        review.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
 # created a user serializer, to only return certain fields from the user model
 class UserSerializer(serializers.ModelSerializer):
     """JSON serializer for users, to have only the id, username, and name fields return

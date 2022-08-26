@@ -3,8 +3,8 @@
         "model": "raterapp.rating",
         "pk": 1, 
         "fields": {
-            "game_id": 1,
-            "player_id": 1,
+            "game": 1,
+            "player": 1,
             "rating": 5
         }
     },
@@ -12,8 +12,8 @@
         "model": "raterapp.rating",
         "pk": 2, 
         "fields": {
-            "game_id": 2,
-            "player_id": 1,
+            "game": 2,
+            "player": 1,
             "rating": 2
 
         }
@@ -21,8 +21,8 @@
         "model": "raterapp.rating",
         "pk": 3, 
         "fields": {
-            "game_id": 3,
-            "player_id": 1,
+            "game": 3,
+            "player": 1,
             "rating": 1
         }
     }

@@ -3,7 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 
-from raterapp.models import Game, Player, Category
+from raterapp.models import Game, Player
 
 
 class GameView(ViewSet):
@@ -39,8 +39,8 @@ class GameView(ViewSet):
 
         Returns:
             response: JSON serializer game gor the selected key
-            events = Event.objects.filter(organizer__user=request.auth.user)
         """
+        # events = Event.objects.filter(organizer__user=request.auth.user)
         # game = Game.objects.filter(player__user=request.auth.user)
         try:
             # matching the received primary key to the list of games primary keys
